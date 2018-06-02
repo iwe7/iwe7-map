@@ -1,0 +1,28 @@
+map-outlet {
+  display: block;
+  position: relative;
+}
+
+[zoomIn] {
+  background: url(//3gimg.qq.com/lightmap/mobilemap/common/images/map_zoom_top_44a1989.png) no-repeat center center;
+  display: inline-block;
+  background-size: 50px 55px;
+  width: 50px;
+  height: 55px;
+  position: fixed;
+  z-index: 99;
+  right: 0px;
+  bottom: 255px;
+}
+
+[zoomOut] {
+  background: url(//3gimg.qq.com/lightmap/mobilemap/common/images/map_zoom_bottom_6654df7.png) no-repeat center center;
+  display: inline-block;
+  background-size: 50px 55px;
+  width: 50px;
+  height: 55px;
+  position: fixed;
+  z-index: 99;
+  right: 0px;
+  bottom: 200px;
+}

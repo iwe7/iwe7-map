@@ -1,0 +1,83 @@
+export type BmapControlAnchor =
+    'BMAP_ANCHOR_TOP_LEFT'
+    | 'BMAP_ANCHOR_TOP_RIGHT'
+    | 'BMAP_ANCHOR_BOTTOM_LEFT'
+    | 'BMAP_ANCHOR_BOTTOM_RIGHT';
+
+export type BmapNavigationControlType =
+    'BMAP_NAVIGATION_CONTROL_LARGE'
+    | 'BMAP_NAVIGATION_CONTROL_SMALL'
+    | 'BMAP_NAVIGATION_CONTROL_PAN'
+    | 'BMAP_NAVIGATION_CONTROL_ZOOM';
+
+
+export type BmapMapTypeControlType =
+    'BMAP_MAPTYPE_CONTROL_HORIZONTAL' |
+    'BMAP_MAPTYPE_CONTROL_DROPDOWN' |
+    'BMAP_MAPTYPE_CONTROL_MAP';
+
+
+export type BmapShapeType =
+    'BMAP_POINT_SHAPE_CIRCLE' |
+    'BMAP_POINT_SHAPE_STAR' |
+    'BMAP_POINT_SHAPE_SQUARE' |
+    'BMAP_POINT_SHAPE_RHOMBUS' |
+    'BMAP_POINT_SHAPE_WATERDROP';
+
+export type BmapSizeType =
+    'BMAP_POINT_SIZE_TINY' |
+    'BMAP_POINT_SIZE_SMALLER' |
+    'BMAP_POINT_SIZE_SMALL' |
+    'BMAP_POINT_SIZE_NORMAL' |
+    'BMAP_POINT_SIZE_BIG' |
+    'BMAP_POINT_SIZE_BIGGER' |
+    'BMAP_POINT_SIZE_HUGE';
+
+export type BmapSymbolShapeType =
+    'BMap_Symbol_SHAPE_CIRCLE' |
+    'BMap_Symbol_SHAPE_RECTANGLE' |
+    'BMap_Symbol_SHAPE_RHOMBUS' |
+    'BMap_Symbol_SHAPE_STAR' |
+    'BMap_Symbol_SHAPE_BACKWARD_CLOSED_ARROW' |
+    'BMap_Symbol_SHAPE_FORWARD_CLOSED_ARROW' |
+    'BMap_Symbol_SHAPE_BACKWARD_OPEN_ARROW' |
+    'BMap_Symbol_SHAPE_FORWARD_OPEN_ARROW' |
+    'BMap_Symbol_SHAPE_POINT' |
+    'BMap_Symbol_SHAPE_PLANE' |
+    'BMap_Symbol_SHAPE_CAMERA' |
+    'BMap_Symbol_SHAPE_WARNING' |
+    'BMap_Symbol_SHAPE_SMILE' |
+    'BMap_Symbol_SHAPE_CLOCK';
+
+export type BmapPointDensityType =
+    'BMAP_POINT_DENSITY_HIGH' |
+    'BMAP_POINT_DENSITY_MEDIUM' |
+    'BMAP_POINT_DENSITY_LOW';
+
+export type BmapPoiType =
+    'BMAP_POI_TYPE_NORMAL' |
+    'BMAP_POI_TYPE_BUSSTOP' |
+    'BMAP_POI_TYPE_SUBSTOP';
+
+export type BmapLineType =
+    'BMAP_LINE_TYPE_BUS' |
+    'BMAP_LINE_TYPE_SUBWAY' |
+    'BMAP_LINE_TYPE_FERRY';
+
+export type BmapRouteType =
+    'BMAP_ROUTE_TYPE_DRIVING' |
+    'BMAP_ROUTE_TYPE_WALKING';
+
+export type BmapPanoramaSceneType =
+    'BMAP_PANORAMA_INDOOR_SCENE' |
+    'BMAP_PANORAMA_STREET_SCENE';
+
+export type BmapPanoramaPOIType =
+    'BMAP_PANORAMA_POI_HOTEL' |
+    'BMAP_PANORAMA_POI_CATERING' |
+    'BMAP_PANORAMA_POI_MOVIE' |
+    'BMAP_PANORAMA_POI_TRANSIT' |
+    'BMAP_PANORAMA_POI_INDOOR_SCENE' |
+    'BMAP_PANORAMA_POI_NONE';
+
+export type BmapAnimation = 'BMAP_ANIMATION_DROP' | 'BMAP_ANIMATION_BOUNCE';
