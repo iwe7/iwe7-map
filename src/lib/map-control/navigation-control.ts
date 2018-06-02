@@ -23,9 +23,9 @@ import { BmapNavigationControlType, BmapControlAnchor } from './types';
 export class NavigationControlDirective {
     @Output() navigationControl: EventEmitter<any> = new EventEmitter();
 
-    @Input() anchor: BmapControlAnchor = 'BMAP_ANCHOR_TOP_LEFT';
+    @Input() anchor: BmapControlAnchor = 'BMAP_ANCHOR_BOTTOM_RIGHT';
     @Input() width: any = 10;
-    @Input() height: any = 100;
+    @Input() height: any = 60;
     @Input() type: BmapNavigationControlType = 'BMAP_NAVIGATION_CONTROL_SMALL';
     @Input() showZoomInfo: boolean = true;
     @Input() enableGeolocation: boolean = true;

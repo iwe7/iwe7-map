@@ -1,3 +1,4 @@
+import { MapContentDirective } from './map-directives/map-content';
 import { CustomControlDirective } from './map-control/custom-control';
 import { WalkingRouteDirective } from './map-route/walking-route';
 import { TransitRouteDirective } from './map-route/transit-route';
@@ -48,7 +49,8 @@ export const MapDirectives = [
   DrivingRouteDirective,
   TransitRouteDirective,
   WalkingRouteDirective,
-  CustomControlDirective
+  CustomControlDirective,
+  MapContentDirective
 ];
 
 

@@ -7,10 +7,10 @@ declare const BMap: any;
 import { BmapControlAnchor } from './types';
 @Directive({ selector: '[trafficControl]' })
 export class TrafficControlDirective implements OnInit {
-    @Input() anchor: BmapControlAnchor = 'BMAP_ANCHOR_BOTTOM_LEFT';
+    @Input() anchor: BmapControlAnchor = 'BMAP_ANCHOR_BOTTOM_RIGHT';
 
     @Input() width: any = 10;
-    @Input() height: any = 100;
+    @Input() height: any = 140;
     constructor(
         public script: Iwe7ScriptService,
         @SkipSelf()

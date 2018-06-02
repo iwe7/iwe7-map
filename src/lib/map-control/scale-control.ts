@@ -7,9 +7,9 @@ declare const BMAP_ANCHOR_TOP_RIGHT: any;
 import { BmapControlAnchor } from './types';
 @Directive({ selector: '[scaleControl]' })
 export class ScaleControlDirective {
-    @Input() anchor: BmapControlAnchor = 'BMAP_ANCHOR_TOP_RIGHT';
-    @Input() width: any = 10;
-    @Input() height: any = 40;
+    @Input() anchor: BmapControlAnchor = 'BMAP_ANCHOR_BOTTOM_LEFT';
+    @Input() width: any = 50;
+    @Input() height: any = 60;
     constructor(
         @SkipSelf()
         @Optional()

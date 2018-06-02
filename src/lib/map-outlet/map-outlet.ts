@@ -1,4 +1,5 @@
-import { ViewEncapsulation } from '@angular/core';
+import { ViewContainerRef } from '@angular/core';
+import { ViewEncapsulation, ViewChild } from '@angular/core';
 import { ElementRef, Self, ChangeDetectorRef, Input, HostBinding, ContentChild, TemplateRef } from '@angular/core';
 import { Iwe7MapService } from './../iwe7-map.service';
 import { Component, Injector, OnInit } from '@angular/core';
@@ -9,7 +10,7 @@ import { BehaviorSubject } from 'rxjs';
 @Component({
     selector: 'map-outlet',
     template: `
-    <ng-container *ngTemplateOutlet="tpl"></ng-container>
+    <ng-container #mapContent></ng-container>
     `,
     styleUrls: ['./map-outlet.scss'],
     providers: [Iwe7MapService],
@@ -22,8 +23,7 @@ export class MapOutletComponent extends CoreDomPortalHost implements OnInit {
     @HostBinding('style.max-height.px')
     @Input()
     height: number;
-
-    @ContentChild(TemplateRef) tpl: TemplateRef<any>;
+    @ViewChild('mapContent', { read: ViewContainerRef }) mapContent: ViewContainerRef;
     constructor(
         injector: Injector,
         @Self()
@@ -35,5 +35,9 @@ export class MapOutletComponent extends CoreDomPortalHost implements OnInit {
     }
     ngOnInit() {
         this.iwe7Map.load();
+    }
+
+    attachContent(tpl: TemplateRef<any>) {
+        this.mapContent.createEmbeddedView(tpl);
     }
 }
