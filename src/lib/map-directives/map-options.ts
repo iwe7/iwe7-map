@@ -4,7 +4,9 @@ import { Iwe7MapService } from './../iwe7-map.service';
 declare const BMap: any;
 declare const BMAP_NORMAL_MAP: any;
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
-@Directive({ selector: '[center],[currentCity],[zoom],[lat],[lng]' })
+@Directive({ selector: `
+    [mapOptions]
+` })
 export class MapOptionsDirective extends MapBaseDirective {
     // 当前城市
     @Input() currentCity: string;
