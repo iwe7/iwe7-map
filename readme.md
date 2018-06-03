@@ -115,10 +115,14 @@
 
 * pane
 
-| selector       | 说明            |               |             |           |                     |              |                |              |
-|----------------|---------------|---------------|-------------|-----------|---------------------|--------------|----------------|--------------|
-| [getContainer] | map container |               |             |           |                     |              |                |              |
+| selector       | 说明            | 
+|----------------|---------------|
+| [getContainer] | map container | 
+
+
+```ts
 | [mapPane]      | 'floatPane'   | 'floatShadow' | 'labelPane' | 'mapPane' | 'markerMouseTarget' | 'markerPane' | 'markerShadow' | 'vertexPane' |
+```
 
 * 转换
 
