@@ -154,7 +154,7 @@
 
 <map-outlet [height]="height">
   <map-container></map-container>
-  <div currentCity="北京" [zoom]="zoom" [lat]="lat" [lng]="lng"></div>
+  <div mapOptions currentCity="北京" [zoom]="zoom" [lat]="lat" [lng]="lng"></div>
   <div (mapMoveend)="mapMoveend($event)"></div>
   <div mapPane="floatPane">
     <map-overlay [lat]="lat" [lng]="lng">
