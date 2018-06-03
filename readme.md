@@ -10,6 +10,7 @@
 | iwe7-icss   | rxjs操作css | https://github.com/iwe7/iwe7-icss   |
 | iwe7-core   | 核心库       | https://github.com/iwe7/iwe7-core   |
 | iwe7-script | 加载css和js  | https://github.com/iwe7/iwe7-script |
+| iwe7-util | 加载css和js  | https://github.com/iwe7/iwe7-util |
 
 ### 百度地图组件
 
