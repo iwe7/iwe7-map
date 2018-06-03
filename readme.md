@@ -64,6 +64,7 @@
 
 
 * 事件
+
 ```ts
 [mapRightclick],[mapRightdblclick],[mapMaptypechange],
     [mapMousemove],[mapMouseover],[mapMouseout],
@@ -93,6 +94,7 @@
     [mapTouchend],
     [mapLongpress] 
 ```
+
 | selector | 说明     |
 |----------|--------|
 | ...      | 监听地图事件 |
@@ -119,6 +121,7 @@
 | [mapPane]      | 'floatPane'   | 'floatShadow' | 'labelPane' | 'mapPane' | 'markerMouseTarget' | 'markerPane' | 'markerShadow' | 'vertexPane' |
 
 * 转换
+
 | selector    | 说明        |
 |-------------|-----------|
 | getPoint    | 字符串转point |
@@ -126,6 +129,7 @@
 
 
 * 导航
+
 | selector      | 说明   |
 |---------------|------|
 | driving-route | 开车导航 |
