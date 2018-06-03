@@ -20,6 +20,7 @@
 | [mapOptions] | 地图参数调整 |
 
 - mapOptions
+
 ```ts
 // 当前城市
 @Input() currentCity: string;
@@ -63,16 +64,9 @@
 
 
 * 事件
-| selector | 说明 |
-|----------|----|
-|          |    |
-    [mapDblclick],
-    [mapRightclick],
-    [mapRightdblclick],
-    [mapMaptypechange],
-    [mapMousemove],
-    [mapMouseover],
-    [mapMouseout],
+```ts
+[mapRightclick],[mapRightdblclick],[mapMaptypechange],
+    [mapMousemove],[mapMouseover],[mapMouseout],
     [mapMovestart],
     [mapMoving],
     [mapMoveend],
@@ -97,7 +91,11 @@
     [mapTouchstart],
     [mapTouchmove],
     [mapTouchend],
-    [mapLongpress]|监听地图事件|
+    [mapLongpress] 
+```
+| selector | 说明     |
+|----------|--------|
+| ...      | 监听地图事件 |
 
 * 方法
 
