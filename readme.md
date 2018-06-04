@@ -15,6 +15,7 @@
 | iwe7-better-scroll | 滑动组件      | https://github.com/iwe7/iwe7-better-scroll |
 | iwe7-web-storage   | 缓存相关      | https://github.com/iwe7/iwe7-web-storage   |
 | iwe7-url           | api链接便签   | https://github.com/iwe7/iwe7-url           |
+| iwe7-video         | 视频播放      | https://github.com/iwe7/iwe7-video         |
 
 
 ### 百度地图组件

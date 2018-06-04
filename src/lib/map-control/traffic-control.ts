@@ -1,44 +1,57 @@
+import { tap, filter } from 'rxjs/operators';
+import { Iwe7MapBase } from './../map-base/map-base';
 import { Iwe7MapService } from './../iwe7-map.service';
-import { OnInit, Input } from '@angular/core';
+import { OnInit, Input, Injector, OnChanges, Component, ChangeDetectionStrategy } from '@angular/core';
 import { Directive, SkipSelf, Optional } from '@angular/core';
 import { Iwe7ScriptService } from 'iwe7-script';
 declare const BMapLib: any;
 declare const BMap: any;
 import { BmapControlAnchor } from './types';
-@Directive({ selector: '[trafficControl]' })
-export class TrafficControlDirective implements OnInit {
+import { switchMap } from 'rxjs/operators';
+@Component({
+    selector: 'traffic-control',
+    template: `
+    <button (click)="switchTraffic($event)" [disabled]="locationing" mat-mini-fab>
+        <mat-icon>traffic</mat-icon>
+    </button>
+    `,
+    changeDetection: ChangeDetectionStrategy.OnPush
+})
+export class TrafficControlDirective extends Iwe7MapBase {
     @Input() anchor: BmapControlAnchor = 'BMAP_ANCHOR_BOTTOM_RIGHT';
-
     @Input() width: any = 10;
     @Input() height: any = 140;
     constructor(
         public script: Iwe7ScriptService,
-        @SkipSelf()
-        @Optional()
-        public mapService: Iwe7MapService,
-    ) { }
-
-    ngOnInit() {
-        this.mapService.loaded.subscribe(res => {
-            if (res) {
-                this.script.load([
-                    'http://api.map.baidu.com/library/TrafficControl/1.4/src/TrafficControl_min.css',
-                    'http://api.map.baidu.com/library/TrafficControl/1.4/src/TrafficControl_min.js'
-                ]).subscribe(res => {
-                    if (res) {
-                        this.mapService.getMap().subscribe(map => {
-                            const ctrl = new BMapLib.TrafficControl({
-                                showPanel: true
-                            });
-                            map.addControl(ctrl);
-                            ctrl.setAnchor((<any>window)[this.anchor]);
-                            ctrl.setOffset(
-                                new BMap.Size(this.width, this.height)
-                            );
-                        });
+        injector: Injector
+    ) {
+        super(injector);
+    }
+    layer: any;
+    map: any;
+    switchTraffic(e: any) {
+        if (this.layer) {
+            this.map.removeTileLayer(this.layer);
+            this.layer = undefined;
+        } else {
+            this.getCyc('getMap').pipe(
+                tap(map => {
+                    this.map = map;
+                    const now = new Date();
+                    let day = now.getDay();
+                    if (day === 0) {
+                        day = 7;
                     }
-                });
-            }
-        });
+                    const hour = now.getHours();
+                    this.layer = new BMap.TrafficLayer({
+                        predictDate: {
+                            weekday: day,
+                            hour: hour
+                        }
+                    });
+                    map.addTileLayer(this.layer);
+                })
+            ).subscribe();
+        }
     }
 }

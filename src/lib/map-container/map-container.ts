@@ -1,5 +1,7 @@
+import { Injector } from '@angular/core';
+import { Iwe7MapBase } from './../map-base/map-base';
 import { Iwe7MapService } from './../iwe7-map.service';
-import { ElementRef, ComponentRef, ViewEncapsulation, SkipSelf, Input } from '@angular/core';
+import { ElementRef, ComponentRef, ViewEncapsulation, SkipSelf, Input, ChangeDetectionStrategy } from '@angular/core';
 import { TemplateRef } from '@angular/core';
 
 import { Component, OnInit, Optional, ViewChild } from '@angular/core';
@@ -11,7 +13,7 @@ declare const BMAP_SATELLITE_MAP: any;
 declare const BMAP_HYBRID_MAP: any;
 
 import { ElementRefPortal, StringPortal } from 'iwe7-core';
-import { takeLast } from 'rxjs/operators';
+import { takeLast, tap } from 'rxjs/operators';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 
 @Component({
@@ -26,28 +28,27 @@ import { coerceBooleanProperty } from '@angular/cdk/coercion';
                 display: block;
             }
         `
-    ]
+    ],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class MapContainerComponent {
+export class MapContainerComponent extends Iwe7MapBase {
     @Input() enableHighResolution: boolean = true;
     @Input() enableMapClick: boolean = true;
 
     constructor(
         public ele: ElementRef,
         @Optional()
-        @SkipSelf()
         public outlet: MapOutletComponent,
-        @SkipSelf()
-        @Optional()
-        public mapService: Iwe7MapService
+        injector: Injector
     ) {
-        if (this.mapService) {
-            this.mapService.loaded.pipe(
-                takeLast(1)
-            ).subscribe(() => {
-                this.initMap();
-            });
-        }
+        super(injector);
+        this.runOutsideAngular(() => {
+            this.getCyc('mapLoaded').pipe(
+                tap(res => {
+                    this.initMap();
+                })
+            ).subscribe();
+        });
     }
 
     initMap() {

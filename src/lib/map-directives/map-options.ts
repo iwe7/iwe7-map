@@ -150,20 +150,19 @@ export class MapOptionsDirective extends MapBaseDirective {
     }
 
     setLat(map: any) {
-        if (this.lng) {
+        if (this.lng && this.lng) {
             this._setCenter(map);
         }
     }
 
     setLng(map: any) {
-        if (this.lat) {
+        if (this.lat && this.lng) {
             this._setCenter(map);
         }
     }
 
     private _setCenter(map: any) {
-        const point = new BMap.Point(this.lat, this.lng);
+        const point = new BMap.Point(this.lng, this.lat);
         map.panTo(point);
-        // map.setCenterAndZoom(point, this.zoom);
     }
 }

@@ -1,4 +1,5 @@
-import { ViewContainerRef } from '@angular/core';
+import { Subject } from 'rxjs';
+import { ViewContainerRef, NgZone, ChangeDetectionStrategy } from '@angular/core';
 import { ViewEncapsulation, ViewChild } from '@angular/core';
 import { ElementRef, Self, ChangeDetectorRef, Input, HostBinding, ContentChild, TemplateRef } from '@angular/core';
 import { Iwe7MapService } from './../iwe7-map.service';
@@ -14,7 +15,8 @@ import { BehaviorSubject } from 'rxjs';
     `,
     styleUrls: ['./map-outlet.scss'],
     providers: [Iwe7MapService],
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 
 export class MapOutletComponent extends CoreDomPortalHost implements OnInit {
@@ -29,15 +31,20 @@ export class MapOutletComponent extends CoreDomPortalHost implements OnInit {
         @Self()
         public iwe7Map: Iwe7MapService,
         public cd: ChangeDetectorRef,
-        ele: ElementRef
+        ele: ElementRef,
+        public _ngZone: NgZone
     ) {
         super(injector, ele.nativeElement);
     }
-    ngOnInit() {
-        this.iwe7Map.load();
-    }
 
+    ngOnInit() {
+        this._ngZone.runOutsideAngular(() => {
+            this.iwe7Map.load();
+        });
+    }
     attachContent(tpl: TemplateRef<any>) {
-        this.mapContent.createEmbeddedView(tpl);
+        this._ngZone.runOutsideAngular(() => {
+            this.mapContent.createEmbeddedView(tpl);
+        });
     }
 }

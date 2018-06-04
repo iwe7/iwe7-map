@@ -1,3 +1,6 @@
+import { tap } from 'rxjs/operators';
+import { Injector } from '@angular/core';
+import { Iwe7MapBase } from './../map-base/map-base';
 import {
     Directive, SkipSelf,
     Optional, ElementRef,
@@ -19,8 +22,9 @@ declare const BMAP_NAVIGATION_CONTROL_PAN: any;
 declare const BMAP_NAVIGATION_CONTROL_ZOOM: any;
 
 import { BmapNavigationControlType, BmapControlAnchor } from './types';
+import { switchMap } from 'rxjs/operators';
 @Directive({ selector: '[navigationControl]' })
-export class NavigationControlDirective {
+export class NavigationControlDirective extends Iwe7MapBase {
     @Output() navigationControl: EventEmitter<any> = new EventEmitter();
 
     @Input() anchor: BmapControlAnchor = 'BMAP_ANCHOR_BOTTOM_RIGHT';
@@ -30,23 +34,35 @@ export class NavigationControlDirective {
     @Input() showZoomInfo: boolean = true;
     @Input() enableGeolocation: boolean = true;
 
-    constructor(
-        @SkipSelf()
-        @Optional()
-        public mapService: Iwe7MapService,
-        public ele: ElementRef
-    ) { }
+    control: any;
 
-    ngOnInit() {
-        this.mapService.getMap().subscribe(map => {
-            const navigationControl = new BMap.NavigationControl({
-                anchor: this.anchor ? (<any>window)[this.anchor] : BMAP_ANCHOR_BOTTOM_LEFT,
-                offset: new BMap.Size(this.width, this.height),
-                type: this.type ? (<any>window)[this.type] : BMAP_NAVIGATION_CONTROL_SMALL,
-                showZoomInfo: this.showZoomInfo,
-                enableGeolocation: this.enableGeolocation
-            });
-            map.addControl(navigationControl);
+    constructor(
+        public ele: ElementRef,
+        injector: Injector
+    ) {
+        super(injector);
+        this.runOutsideAngular(() => {
+            this.getCyc('getMap').pipe(
+                switchMap(map => {
+                    return this.getCyc('ngOnCHanges').pipe(
+                        tap(res => {
+                            if (this.control) {
+                                map.removeControl(this.control);
+                            }
+                        }),
+                        tap(changes => {
+                            this.control = new BMap.NavigationControl({
+                                anchor: this.anchor ? (<any>window)[this.anchor] : BMAP_ANCHOR_BOTTOM_LEFT,
+                                offset: new BMap.Size(this.width, this.height),
+                                type: this.type ? (<any>window)[this.type] : BMAP_NAVIGATION_CONTROL_SMALL,
+                                showZoomInfo: this.showZoomInfo,
+                                enableGeolocation: this.enableGeolocation
+                            });
+                            map.addControl(this.control);
+                        })
+                    );
+                })
+            ).subscribe();
         });
     }
 }

@@ -1,4 +1,4 @@
-import { Component, ContentChild, TemplateRef } from '@angular/core';
+import { Component, ContentChild, TemplateRef, EventEmitter, Output } from '@angular/core';
 import { ViewContainerRef } from '@angular/core';
 import { Iwe7MapService } from './../iwe7-map.service';
 import { Directive, Input, SkipSelf, Optional } from '@angular/core';
@@ -13,6 +13,7 @@ declare const BMAP_STATUS_SUCCESS: any;
 ` })
 export class LocalSearchDirective {
     pois: any[] = [];
+    @Output() onSearchComplete: EventEmitter<any> = new EventEmitter();
     @Input()
     set localSearch(val: string) {
         if (val) {
@@ -26,6 +27,7 @@ export class LocalSearchDirective {
                                 pois.push(results.getPoi(i));
                             }
                             this.pois = pois;
+                            this.onSearchComplete.emit(this.pois);
                         }
                     }
                 });
@@ -35,9 +37,9 @@ export class LocalSearchDirective {
     }
     @ContentChild(TemplateRef) template: TemplateRef<any>;
     constructor(
-        @SkipSelf()
         @Optional()
         public mapService: Iwe7MapService,
+        @Optional()
         public view: ViewContainerRef,
     ) { }
 }

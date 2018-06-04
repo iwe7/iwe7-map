@@ -1,5 +1,9 @@
+import { MemberControlComponent } from './map-control/member-control';
+import { MapGetElementRefDirective } from './get-element-ref';
+import { PanoramaControlComponent } from './map-control/panorama-control';
+import { StoreControlComponent } from './map-control/store-control';
+import { GeolocationDirective } from './map-method/geolocation';
 import { MapContentDirective } from './map-directives/map-content';
-import { CustomControlDirective } from './map-control/custom-control';
 import { WalkingRouteDirective } from './map-route/walking-route';
 import { TransitRouteDirective } from './map-route/transit-route';
 import { DrivingRouteDirective } from './map-route/driving-route';
@@ -25,12 +29,18 @@ import { MapOutletComponent } from './map-outlet/map-outlet';
 import { MapContainerComponent } from './map-container/map-container';
 import { MapOptionsDirective } from './map-directives/map-options';
 
+import { MatButtonModule, MatIconModule, MatProgressSpinnerModule } from '@angular/material';
+import { CustomControlDirective } from './map-control/custom-control';
+
 export const MapComponents = [
   MapOutletComponent,
   MapContainerComponent,
   MapOverlayComponent,
   GetLocationPipe,
-  GetPointPipe
+  GetPointPipe,
+  StoreControlComponent,
+  PanoramaControlComponent,
+  MemberControlComponent
 ];
 
 export const MapDirectives = [
@@ -49,15 +59,20 @@ export const MapDirectives = [
   DrivingRouteDirective,
   TransitRouteDirective,
   WalkingRouteDirective,
+  MapContentDirective,
+  GeolocationDirective,
   CustomControlDirective,
-  MapContentDirective
+  MapGetElementRefDirective
 ];
 
 
 @NgModule({
   imports: [
     PortalModule,
-    CommonModule
+    CommonModule,
+    MatButtonModule, 
+    MatIconModule,
+    MatProgressSpinnerModule
   ],
   declarations: [...MapComponents, ...MapDirectives],
   exports: [...MapComponents, ...MapDirectives],
